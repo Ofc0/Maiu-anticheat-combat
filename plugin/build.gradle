@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+    id 'com.gradleup.shadow' version '9.0.0'
+}
+
+group = 'de.maiu.anticheat'
+version = '2.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.release.set(8)
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    maven { url = 'https://repo.papermc.io/repository/maven-public/' }
+    maven { url = 'https://repo.codemc.io/repository/maven-releases/' }
+    maven { url = 'https://repo.codemc.io/repository/maven-public/' }
+}
+
+dependencies {
+    // Bukkit API 1.8.8 as compile baseline -> runs on 1.8.x ... 1.21.x
+    compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
+    compileOnly 'com.google.code.gson:gson:2.8.9'
+    // PacketEvents: packet level combat analysis + packet-based decoy (shaded + relocated)
+    implementation 'com.github.retrooper:packetevents-spigot:2.14.0'
+}
+
+shadowJar {
+    archiveBaseName.set('MaiuCombatAC')
+    archiveClassifier.set('')
+    archiveVersion.set(project.version)
+    // Keep our own plugin.yml (first in copy spec) and ignore PacketEvents' embedded plugin descriptors
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    exclude 'paper-plugin.yml'
+    exclude 'bungee.yml'
+    exclude 'velocity-plugin.json'
+    relocate 'com.github.retrooper.packetevents', 'de.maiu.anticheat.libs.packetevents.api'
+    relocate 'io.github.retrooper.packetevents', 'de.maiu.anticheat.libs.packetevents.impl'
+    // adventure / nbt come in transitively and must not clash with other plugins
+    relocate 'net.kyori', 'de.maiu.anticheat.libs.kyori'
+}
+
+jar {
+    enabled = false
+}
+
+tasks.build {
+    dependsOn tasks.shadowJar
+}

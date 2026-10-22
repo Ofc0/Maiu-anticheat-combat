@@ -1,0 +1,50 @@
+# ==========================================================
+#   MaiuAC 2.0 - packet level combat anticheat
+#   Rule engine decides, local Ollama AI gives a second opinion
+# ==========================================================
+
+ai:
+  enabled: true
+  ollama_url: "http://localhost:11434"
+  model: "maiu-combat-ai"
+  timeout_ms: 8000
+  judge_cooldown_seconds: 6
+
+checks:
+  reach:
+    limit: 3.41            # flag above this (lag compensated, eye -> hitbox)
+    hard_limit: 3.9        # impossible: hit gets cancelled
+    cancel_impossible: true
+  wallhit:
+    cancel: true
+  killaura:
+    angle_soft: 20.0       # hit this many degrees outside the crosshair = suspicious
+    angle_hard: 38.0
+    switch_ms: 250
+    switch_angle: 40.0
+  aim:
+    suspect_score: 0.30    # score that spawns the decoy (never punishes alone)
+
+flag_vl:
+  reach: 3.0
+  wallhit: 3.0
+  killaura: 4.0
+  aimassist: 5.0
+  triggerbot: 5.0
+
+decoy:
+  enabled: true
+  duration_seconds: 5
+  cooldown_seconds: 10
+  auto_on_suspicion: true
+
+punishments:
+  damage_multiplier: 0.0   # while flagged: 0 = no damage, 0.1 = 10%, 1 = off
+  duration_seconds: 60
+  kick:
+    enabled: false
+    message: "&c[MaiuAC] Unfair combat advantage detected."
+  ban:
+    enabled: false
+    after_flags: 3
+    command: "ban %player% [MaiuAC] %cheat%"

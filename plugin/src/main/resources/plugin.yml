@@ -1,0 +1,20 @@
+name: MaiuCombatAC
+version: 2.0.0
+main: de.maiu.anticheat.MaiuAntiCheat
+description: Packet-level combat anticheat with AuraBot decoy and local AI second opinion
+author: Maiu
+commands:
+  maiu:
+    description: MaiuAC control command
+    permission: maiu.admin
+    usage: /maiu
+permissions:
+  maiu.admin:
+    description: Use MaiuAC commands
+    default: op
+  maiu.alerts:
+    description: Receive flag alerts
+    default: op
+  maiu.bypass:
+    description: Not analysed by the combat checks
+    default: false

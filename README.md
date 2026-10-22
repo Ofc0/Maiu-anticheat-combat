@@ -1,6 +1,6 @@
 # MaiuCombatAC (v2.0 BETA)
 
-BEFORE YOU SAY ANYTHING ITS IN BETA AND NOT FOR A SERVER ITS COULD BE HAVE FALSE FLAGGS IF YOU HAVE A BETTER AI YOU COULD RUN IT "/NOT FOR SERVERS THAT NEED A COMBAT ANTICHEAT\"
+BEFORE YOU SAY ANYTHING ITS IN BETA AND NOT FOR A SERVER ITS COULD BE HAVE FALSE FLAGGS IF YOU HAVE A BETTER AI YOU COULD RUN IT # NOT FOR SERVERS THAT NEED A COMBAT ANTICHEAT
 
 A high-performance, packet-level **Combat Anti-Cheat** with an **in-depth AuraBot decoy** and **asynchronous local AI verification (Ollama)** for Minecraft servers (**Spigot, Paper, Purpur, Folia**) across versions **1.8.9 to 1.21+**.
 

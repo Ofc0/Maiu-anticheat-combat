@@ -1,0 +1,19 @@
+# Minecraft server run environment
+server/
+
+# Gradle build cache & build outputs
+plugin/build/
+.gradle/
+plugin/.gradle/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# System / IDE
+.idea/
+.vscode/
+*.iml
+desktop.ini
+Thumbs.db
+.DS_Store
